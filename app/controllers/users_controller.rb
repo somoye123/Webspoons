@@ -3,11 +3,20 @@ class UsersController < ApplicationController
 
   # GET /users or /users.json
   def index
+    return @users = search_users if params[:search]
+
     @users = if params[:sort]
                User.order(params[:sort])
              else
                User.all.ordered_column
              end
+  end
+
+  def search_users
+    @parameter = params[:search].downcase
+    User.all.where(
+      'lower(name) LIKE :search OR lower(email) LIKE :search OR lower(title) LIKE :search OR lower(phone) LIKE :search OR lower(status) LIKE :search', search: "%#{@parameter}%"
+    )
   end
 
   # GET /users/1 or /users/1.json
