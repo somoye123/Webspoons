@@ -6,3 +6,16 @@ require 'faker'
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+# generate 1000 users
+(1..1000).each do |id|
+    User.create!(
+# each user is assigned an id from 1-1000
+        id: id, 
+        name: Faker::Name.name,
+        email: Faker::Internet.unique.email,
+        title: Faker::Name.name,
+        phone: Faker::PhoneNumber.cell_phone,
+        status: %w[active inactive].sample 
+    )
+end
