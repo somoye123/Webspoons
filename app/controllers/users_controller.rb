@@ -3,7 +3,11 @@ class UsersController < ApplicationController
 
   # GET /users or /users.json
   def index
-    @users = User.all.ordered_column
+    @users = if params[:sort]
+               User.order(params[:sort])
+             else
+               User.all.ordered_column
+             end
   end
 
   # GET /users/1 or /users/1.json
