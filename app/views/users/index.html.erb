@@ -21,7 +21,7 @@
         <td><%= user.email %></td>
         <td><%= user.title %></td>
         <td><%= user.phone %></td>
-        <td><%= user.status %></td>
+        <td class=<%="#{user.status == 'active' ? 'green' : 'red'}"%>><%= user.status %></td>
         <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
         <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
