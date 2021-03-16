@@ -6,17 +6,17 @@ class UsersController < ApplicationController
     return @users = search_users if params[:search]
 
     @users = if params[:sort]
-               User.order(params[:sort])
+               User.paginate(page: params[:page], per_page: 25).order(params[:sort])
              else
-               User.all.ordered_column
+               User.paginate(page: params[:page], per_page: 25).ordered_column
              end
   end
 
   def search_users
     @parameter = params[:search].downcase
-    User.all.where(
+    User.where(
       'lower(name) LIKE :search OR lower(email) LIKE :search OR lower(title) LIKE :search OR lower(phone) LIKE :search OR lower(status) LIKE :search', search: "%#{@parameter}%"
-    )
+    ).paginate(page: params[:page], per_page: 25).ordered_column
   end
 
   # GET /users/1 or /users/1.json
