@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  after_create_commit { broadcast_prepend_to 'users' }
+  after_update_commit { broadcast_prepend_to 'users' }
+
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
 
   validates :name, :email, :title, :status, :phone, presence: true

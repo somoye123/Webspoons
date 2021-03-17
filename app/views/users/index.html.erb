@@ -2,10 +2,19 @@
 
 <h1>Users</h1>
 
+<%= turbo_frame_tag "newuser" do %>
+<button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black">New Post</button>
+<% end %>
+
+
 <%= form_tag(users_path, method: :get) do %>
   <p> Search for users </p>
   <%= text_field_tag(:search, params[:search]) %>
   <%= submit_tag ("Search") %>
+<% end %>
+
+<%= turbo_frame_tag "user_form" do %>
+  <%= render 'users/form', user: User.new %>
 <% end %>
 
 <table>
@@ -21,17 +30,9 @@
   </thead>
 
   <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.name %></td>
-        <td><%= user.email %></td>
-        <td><%= user.title %></td>
-        <td><%= user.phone %></td>
-        <td class=<%="#{user.status == 'active' ? 'green' : 'red'}"%>><%= user.status %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <%= turbo_stream_from 'users' %>
+    <%= turbo_frame_tag 'users' do %>
+      <%= render @users %>
     <% end %>
   </tbody>
 </table>
@@ -44,3 +45,25 @@
 <br>
 
 <%= link_to 'New User', new_user_path %>
+
+
+
+
+<div id="id01" class="w3-modal" style="display: none">
+    <div class="w3-modal-content">
+      <div class="w3-container">
+        <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+        
+        
+        <h1>User</h1>
+<%= turbo_frame_tag "user" do %>
+<%= render 'form', user: @user %>
+<% end %>
+
+<%= link_to 'Show', @user %> |
+<%= link_to 'Back', users_path %>
+
+      </div>
+    </div>
+  </div>
+</div>

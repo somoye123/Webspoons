@@ -1,6 +1,5 @@
 <h1>Editing User</h1>
-
-<%= render 'form', user: @user %>
-
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+<%= turbo_frame_tag dom_id(@user) do %>
+  <%= render 'form', user: @user %>
+  <%= link_to 'Cancel', @user %>
+<% end %>
