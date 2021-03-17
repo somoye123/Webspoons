@@ -50,12 +50,12 @@ group :test do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'bootstrap'
 gem 'bootstrap-will_paginate'
 gem 'faker'
 gem 'hotwire-rails'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'will_paginate'
-gem 'bootstrap'
 
 group :production do
   gem 'pg'
