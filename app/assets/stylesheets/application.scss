@@ -63,6 +63,7 @@ digg_pagination {
     *:first-child + html .digg_pagination {
       overflow: hidden; 
   }
+  
   .w3-modal {
     z-index: 3;
     display: none;
@@ -81,7 +82,7 @@ digg_pagination {
     margin: auto;
     background-color: #fff;
     position: relative;
-    padding: 0;
+    padding: 10px;
     outline: 0;
     width: 600px;
 }
