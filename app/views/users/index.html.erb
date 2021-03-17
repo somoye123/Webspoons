@@ -8,6 +8,10 @@
   <%= submit_tag ("Search") %>
 <% end %>
 
+<%= turbo_frame_tag "newuser" do %>
+  <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black my-4">New User</button>
+<% end %>
+
 <table>
   <thead>
     <tr>
@@ -43,4 +47,18 @@
 </div>
 <br>
 
-<%= link_to 'New User', new_user_path %>
+<div id="id01" class="w3-modal" style="display: none">
+  <div class="w3-modal-content">
+    <div class="w3-container">
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="document.getElementById('id01').style.display='none'">
+        &times;
+      </button>
+      <h5 class="modal-title" id="exampleModalLabel">New User</h5>
+      <div class="modal-body">
+        <%= turbo_frame_tag "user" do %>
+          <%= render 'form', user: @user %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
