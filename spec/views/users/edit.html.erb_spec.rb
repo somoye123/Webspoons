@@ -4,10 +4,10 @@ RSpec.describe 'users/edit', type: :view do
   before(:each) do
     @user = assign(:user, User.create!(
                             name: 'MyString',
-                            email: 'MyString',
+                            email: 'test@gmail.com',
                             title: 'MyString',
                             phone: 1,
-                            status: 'MyString'
+                            status: 'active'
                           ))
   end
 
