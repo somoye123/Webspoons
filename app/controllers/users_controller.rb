@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   # GET /users or /users.json
   def index
+    @user = User.new
     return @users = search_users if params[:search]
 
     @users = if params[:sort]
